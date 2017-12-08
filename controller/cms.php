@@ -7,6 +7,7 @@ class cms extends Controller {
   private $parameters = [];
 
 
+
   public function __construct($pageName, $method, $parameters) {
     $this->pagename = $pageName;
     $this->method = $method;
@@ -23,7 +24,8 @@ class cms extends Controller {
 
     $this->view('view/pages/cms/cms.php', [
       'content' => $pageContent,
-      'title'   => $this->pagename
+      'title'   => $this->pagename,
+      'css'     => $this->CreateCSSLinks(['view/css/master.css'])
     ]);
 
     return null;
