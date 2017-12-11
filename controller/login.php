@@ -37,9 +37,6 @@ class Login extends Controller {
       return;
     }
 
-    $result = static::$dbconn->ReadData([
-      'query' => '',
-    ]);
 
 
 
