@@ -2,8 +2,11 @@
 
 abstract class Controller {
   protected $requireLogin = false;
+  protected static $dbconn;
+
 
   public function __construct() {
+    static::$dbconn = $this->Dbconn();
     $this->CheckLogin();
   }
 
