@@ -126,7 +126,7 @@ class Validator {
     return $output;
   }
 
-  protected function filter_empty($value, $params = null, $postName = '') {
+  protected function filter_not_empty($value, $params = null, $postName = '') {
     $output = ($value == '') ? false : true;
 
     if($output === false) {
