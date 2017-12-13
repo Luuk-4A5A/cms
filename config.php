@@ -1,7 +1,7 @@
 <?php
 
 define('SERVERNAME', 'localhost');
-define('DBNAME', 'l-cms');
+define('DBNAME', 'cms');
 define('USERNAME', 'root');
 define('PASSWORD', '');
 

@@ -8,14 +8,20 @@ class User {
   public function __construct($username) {
     $this->username = $username;
     $this->dbhandler = DbHandler::GetInstance();
-    $this->userData($this->dbhandler->ReadData([
+
+    $user = $this->dbhandler->ReadData([
       'query'     => 'SELECT * from user WHERE username = :username',
       'bindParam' => [':username' => $this->username]
-    ])[0]);
+    ]);
+
+    if(!empty($user)) {
+      $this->userData($user[0]);
+    }
+
 
   }
 
-  public function userData(array $data = []) {
+  public function userData($data = []) {
     if(empty($data)) {
       return $this->userData;
     }
@@ -24,6 +30,10 @@ class User {
   }
 
   public function checkLogin($password) {
+    if(empty($this->userData)) {
+      return false;
+    }
+
     if(password_verify($password, $this->userData['password'])) {
       return true;
     }
