@@ -1,14 +1,26 @@
 <?php
 
-Class DbHandler {
-  private $conn;
+class DbHandler {
+  private static $instance = null;
+  private $conn = null;
+  private $servername = SERVERNAME;
+  private $dbname = DBNAME;
+  private $username = USERNAME;
+  private $password = PASSWORD;
 
-  public function __construct($serverName, $databaseName, $username, $password) {
+  public function __construct() {
     try {
-      $this->conn = new PDO('mysql:dbname=' . $databaseName . ';host=' . $serverName, $username, $password);
+      $this->conn = new PDO('mysql:dbname=' . $this->dbname . ';host=' . $this->servername, $this->username, $this->password);
     } catch(PDOException $e) {
       echo 'Connection failed: ' . $e->getMessage();
     }
+  }
+
+  public static function GetInstance() {
+    if(static::$instance == null) {
+      static::$instance = new static();
+    }
+    return static::$instance;
   }
 
   private function PrepQuery($query) {
@@ -43,4 +55,10 @@ Class DbHandler {
     $prepped->execute();
     return $prepped->rowCount();
   }
+
+
+  public function __destruct() {
+    $this->conn = null;
+  }
+
 }

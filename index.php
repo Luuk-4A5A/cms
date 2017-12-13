@@ -18,7 +18,7 @@
  * @return boolean true on success
  */
 
-function printr($array) {
+function printr($array = []) {
   echo '<pre>';
   print_r($array);
   echo '</pre>';
@@ -31,14 +31,14 @@ function printr($array) {
  * @return boolean true on success
  */
 
-function vardump($array) {
+function vardump($array = []) {
    echo '<pre>';
    var_dump($array);
    echo '</pre>';
    return true;
  }
 
-function jsonp($array) {
+function jsonp($array = []) {
   echo json_encode($array);
 }
 
@@ -55,7 +55,7 @@ final class Router {
   private $dbhandler = null;
 
   public function __construct() {
-    $this->dbhandler = new DbHandler('localhost', 'l-cms', 'root', '');
+    $this->dbhandler = DbHandler::GetInstance();
     $this->url = $this->ProcessUrl();
     $this->DetermineDestination();
   }
