@@ -171,7 +171,6 @@ class Validator {
    */
   public function filter(array $input, array $filters) {
     $this->filterFunctions($filters);
-    // printr($this->filterFunctions());
 
     foreach($input as $postName => $postValue) {
       if(!array_key_exists($postName, $this->filter_functions)) {
