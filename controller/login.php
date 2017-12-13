@@ -28,6 +28,8 @@ class Login extends Controller {
       'password'  => 'not_empty'
     ];
 
+
+
     try {
       $outcome = $this->validator->filter($_POST, $filters);
     } catch(Exception $e) {
@@ -41,7 +43,7 @@ class Login extends Controller {
 
     $sanitize_options = [
       'username' => 'trim',
-      'password' => ''
+      'password' => 'trim'
     ];
 
     try {
@@ -50,12 +52,15 @@ class Login extends Controller {
       printr($e->getMessage());
     }
 
-    // $this->user = $this->model('user', $sanitizedPost['username']);
-    //
-    // printr($this->dbconn->ReadData([
-    //   'query'     => 'SELECT user.password FROM user WHERE user.username = :username',
-    //   'bindParam' => [':username' => $_POST['username']]
-    // ]));
+    $user = $this->model('user', $sanitizedPost['username']);
+    $loginRequest = $user->checkLogin($sanitizedPost['password']);
+
+    if($loginRequest) {
+      session_start();
+      $_SESSION['cms']['user'] = $user->userData();
+      jsonp(['url' => '/dashboard']);
+    }
+
 
   }
 

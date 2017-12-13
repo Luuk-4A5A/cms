@@ -1,7 +1,6 @@
 <?php
 
 class cms extends Controller {
-  private $dbhandler = null;
   private $pagename = '';
   private $method = '';
   private $parameters = [];
@@ -9,14 +8,14 @@ class cms extends Controller {
 
 
   public function __construct($pageName, $method, $parameters) {
+    $this->dbconn = DbHandler::GetInstance();
     $this->pagename = $pageName;
     $this->method = $method;
     $this->parameters = $parameters;
-    $this->dbhandler = $this->DbConn();
   }
 
   public function index() {
-    $pageContent = $this->dbhandler->ReadData([
+    $pageContent = $this->dbconn->ReadData([
       'query'     => 'SELECT content.content FROM content INNER JOIN page ON page.page_id = content.pages_page_id WHERE page.page_name = :pagename',
       'bindParam' => [':pagename' => $this->pagename]
     ])[0]['content'];
