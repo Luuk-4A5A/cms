@@ -15,7 +15,7 @@ abstract class Controller {
     if($this->requireLogin) {
       session_start();
       if(!$this->checkSession('cms')){
-        header('location: /lh-login');
+        header('location: /login');
       }
     }
   }
