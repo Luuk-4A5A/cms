@@ -5,11 +5,11 @@
     <h3>Login to CMS</h3>
     <div class="login-input-container">
       <label>Username</label>
-      <div class="login-input"><i class="icon fa fa-user"></i><input type="text" value="luuk12345" form-tag="username" placeholder="Username"></div>
+      <div class="login-input"><i class="icon fa fa-user"></i><input type="text" value="luuk-h" form-tag="username" placeholder="Username"></div>
     </div>
     <div class="login-input-container">
       <label>Password</label>
-      <div class="login-input"><i class="icon fa fa-key"></i><input type="password" value="wachtwoord" form-tag="password" placeholder="Password"></div>
+      <div class="login-input"><i class="icon fa fa-key"></i><input type="password" value="12345" form-tag="password" placeholder="Password"></div>
     </div>
   </section>
   <section class="login-container-button">

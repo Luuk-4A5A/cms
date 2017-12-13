@@ -60,5 +60,5 @@ class DbHandler {
   public function __destruct() {
     $this->conn = null;
   }
-  
+
 }

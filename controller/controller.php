@@ -2,13 +2,14 @@
 
 abstract class Controller {
   protected $requireLogin = false;
-  protected static $dbconn;
+  protected $dbconn = null;
 
 
   public function __construct() {
-    static::$dbconn = $this->Dbconn();
+    $this->dbconn = DbHandler::GetInstance();
     $this->CheckLogin();
   }
+
 
   protected function CheckLogin() {
     if($this->requireLogin) {
@@ -17,11 +18,6 @@ abstract class Controller {
         header('location: /lh-login');
       }
     }
-  }
-
-
-  protected function Dbconn() {
-    return new DbHandler(SERVERNAME, DBNAME, USERNAME, PASSWORD);
   }
 
 
@@ -52,7 +48,7 @@ abstract class Controller {
   }
 
 
-  protected function model($model, array $parameters = []) {
+  protected function model($model, $parameters = []) {
     if(!file_exists('model/' . $model . '.php')) {
       return false;
     }

@@ -55,7 +55,7 @@ final class Router {
   private $dbhandler = null;
 
   public function __construct() {
-    $this->dbhandler = new DbHandler('localhost', 'l-cms', 'root', '');
+    $this->dbhandler = DbHandler::GetInstance();
     $this->url = $this->ProcessUrl();
     $this->DetermineDestination();
   }
